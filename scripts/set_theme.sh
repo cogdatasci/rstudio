@@ -3,5 +3,5 @@
 THEME=${THEME:=none}
 
 if [ "$THEME" != none ]; then
-	echo "{ "editor_theme": \"$THEME\" }" > ~/.config/rstudio/rstudio-prefs.json
+	echo "{ \"editor_theme\": \"$THEME\" }" > ~/.config/rstudio/rstudio-prefs.json
 fi
