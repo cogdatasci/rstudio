@@ -1,25 +1,24 @@
 ####### Dockerfile #######
-FROM rocker/verse:4.0.5
+FROM rocker/verse:4.1.1
 
 ENV DEBIAN_FRONTEND noninteractive
-
-COPY scripts/set_theme.sh /etc/cont-init.d/theme
-
-COPY scripts/git_config.sh /etc/cont-init.d/gitconfig
 
 COPY scripts/rstudio_bindings.json /home/rstudio/.R/rstudio/keybindings/rstudio_bindings.json
 
 RUN install2.r --error --skipinstalled \
   styler \
   brms \
-  tidybayes \
   BayesFactor \
   dagitty \
   lavaan \
   bnlearn \
   betareg \
   boot \
+  lavaan \
   blavaan \
-  bnlearn \
   simsem \
   tidygraph
+
+RUN R -e "devtools::install_github(c('thomasp85/patchwork', 'rmcelreath/rethinking'))"
+
+RUN R -e "devtools::install_version('tidybayes', version='3.0.0')"
